@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import SeasonDisplay from "./SeasonDisplay";
 import Loading from "./Loading";
+import "./style/App.css";
 
 class App extends React.Component {
   state = { lat: null, errorMessage: "" };
@@ -11,8 +12,10 @@ class App extends React.Component {
       (err) => this.setState({ errorMessage: err.message })
     );
   }
-  //React says we have to define render!!!
-  render() {
+
+  //Helper Funciton - want to keep logic statements in a helper class
+
+  renderContent() {
     if (this.state.errorMessage && !this.state.lat) {
       return <div> Error: {this.state.errorMessage}</div>;
     }
@@ -22,6 +25,11 @@ class App extends React.Component {
     }
 
     return <Loading message="Please Accept Geolocation Request" />;
+  }
+
+  //React says we have to define render!!!
+  render() {
+    return <div className="border red">{this.renderContent()}</div>;
   }
 }
 
