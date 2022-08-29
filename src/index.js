@@ -13,6 +13,8 @@ class App extends React.Component {
     this.state = { lat: null, errorMessage: "" }; //this is the only time we directly assign anything to this.state
     //moved this from render() because render() will be called so often, keeping this code in there will
     //bog down the system
+  }
+  componentDidMount() {
     window.navigator.geolocation.getCurrentPosition(
       (position) => {
         //we called setstate to update our state object!!!!
@@ -24,7 +26,6 @@ class App extends React.Component {
       }
     );
   }
-
   //React says we have to define render!!!
   render() {
     if (this.state.errorMessage && !this.state.lat) {
