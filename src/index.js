@@ -10,7 +10,7 @@ class App extends React.Component {
     //also run the React.Component contructor()
     super(props); //calls parents constructor function
 
-    this.state = { lat: null }; //this is the only time we directly assign anything to this.state
+    this.state = { lat: null, errorMessage: "" }; //this is the only time we directly assign anything to this.state
     //moved this from render() because render() will be called so often, keeping this code in there will
     //bog down the system
     window.navigator.geolocation.getCurrentPosition(
@@ -19,13 +19,21 @@ class App extends React.Component {
         this.setState({ lat: position.coords.latitude });
         //DO NOT DIRECT ASSIGN IT LIKE THIS this.state.lat = position.coords.latitude
       },
-      (err) => console.log(err)
+      (err) => {
+        this.setState({ errorMessage: err.message });
+      }
     );
   }
 
   //React says we have to define render!!!
   render() {
-    return <div>Latitude: {this.state.lat}</div>;
+    return (
+      <div>
+        Latitude: {this.state.lat}
+        <br />
+        Error: {this.state.errorMessage}
+      </div>
+    );
   }
 }
 
