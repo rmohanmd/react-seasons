@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
 import SeasonDisplay from "./SeasonDisplay";
 import Loading from "./Loading";
 import "./style/App.css";
@@ -32,5 +32,6 @@ class App extends React.Component {
     return <div className="border red">{this.renderContent()}</div>;
   }
 }
-
-ReactDOM.render(<App />, document.querySelector("#root"));
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<App />);
+//ReactDOM.render(<App />, document.querySelector("#root"));
